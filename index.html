@@ -34,16 +34,6 @@
     .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a { font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: all 0.25s; }
-    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 99; background: rgba(248,247,244,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); flex-direction: column; padding: 16px 24px 24px; }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: 13px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--mid); padding: 12px 0; border-bottom: 1px solid var(--rule); transition: color 0.2s; }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { color: var(--accent); }
 
     /* LAYOUT */
     .page { max-width: var(--max); margin: 0 auto; padding: 0 48px; }
@@ -100,10 +90,7 @@
     .hero { animation: fadeUp 0.7s ease both; }
 
     @media (max-width: 640px) {
-      nav { padding: 0 24px; flex-wrap: wrap; height: auto; padding-top: 12px; padding-bottom: 12px; gap: 8px; }
-      .nav-name { font-size: 14px; }
-      .nav-links { gap: 20px; }
-      .nav-links a { font-size: 10px; letter-spacing: 0.08em; } .hamburger { display: flex; }
+      nav { padding: 0 24px; } .nav-links { display: none; }
       .page { padding: 0 24px; }
       .hero { padding-top: 100px; padding-bottom: 56px; }
       .section { padding: 56px 0; }
@@ -120,33 +107,9 @@
   <ul class="nav-links">
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="work.html">Work</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
-
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#experience" onclick="closeMenu()">Experience</a>
-  <a href="#skills" onclick="closeMenu()">Skills</a>
-  <a href="work.html">Work</a>
-  <a href="#contact" onclick="closeMenu()">Contact</a>
-</div>
-
-<script>
-  var btn = document.getElementById('hamburger');
-  var menu = document.getElementById('mobile-menu');
-  btn.addEventListener('click', function() {
-    btn.classList.toggle('open');
-    menu.classList.toggle('open');
-  });
-  function closeMenu() {
-    btn.classList.remove('open');
-    menu.classList.remove('open');
-  }
-</script>
 
 <div class="page">
 
