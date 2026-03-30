@@ -7,20 +7,19 @@
   <meta name="description" content="Senior Project & Program Manager specialising in PMO governance, cross-functional programme delivery, and AI-augmented operations. Available for advisory and delivery engagements." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0b0b0e;
-      --surface: #111116;
-      --border: #1e1e26;
-      --text: #e8e5de;
-      --muted: #7a7870;
-      --accent: #c8a96e;
-      --accent-dim: rgba(200, 169, 110, 0.12);
-      --font-display: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Syne', sans-serif;
+      --bg: #f9f9f8;
+      --surface: #f2f2f0;
+      --border: #e0e0dd;
+      --text: #111110;
+      --muted: #888884;
+      --accent: #111110;
+      --font: 'DM Sans', sans-serif;
+      --mono: 'DM Mono', monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -28,13 +27,569 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--font-body);
+      font-family: var(--font);
       font-size: 15px;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
 
+    /* NAV */
     nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 48px;
+      height: 60px;
+      background: rgba(249, 249, 248, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-name {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 48px 80px;
+      gap: 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 32px;
+    }
+    .hero-name {
+      font-size: clamp(44px, 5.5vw, 76px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .hero-name span { font-weight: 600; }
+    .hero-tagline {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 44px;
+      max-width: 400px;
+      font-weight: 300;
+    }
+    .hero-tagline strong { color: var(--text); font-weight: 500; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--text);
+      color: var(--bg);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      padding: 12px 24px;
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.75; }
+    .btn-secondary {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 12px 24px;
+      margin-left: 8px;
+      border: 1px solid var(--border);
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .btn-secondary:hover { color: var(--text); border-color: var(--text); }
+
+    /* STAT GRID */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--border);
+    }
+    .stat {
+      padding: 36px 32px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat:nth-child(2), .stat:nth-child(4) { border-right: none; }
+    .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+    .stat-number {
+      font-size: 44px;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-number span { font-weight: 600; }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* POSITIONING */
+    .positioning {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .pos-card {
+      padding: 48px;
+      border-right: 1px solid var(--border);
+    }
+    .pos-card:last-child { border-right: none; }
+    .pos-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .pos-text {
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 400;
+      line-height: 1.65;
+    }
+
+    /* SECTIONS */
+    section { padding: 96px 48px; border-bottom: 1px solid var(--border); }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 64px;
+    }
+    .section-index {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .section-title {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* EXPERIENCE */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: 1px solid var(--border); }
+    .exp-period {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .exp-company {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .exp-title {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .exp-bullets li {
+      font-size: 14px;
+      color: var(--muted);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .exp-bullets li::before {
+      content: '/';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+      font-family: var(--mono);
+    }
+    .exp-bullets li strong { color: var(--text); font-weight: 500; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border: 1px solid var(--border);
+    }
+    .skill-block {
+      padding: 40px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-block:nth-child(2), .skill-block:nth-child(4) { border-right: none; }
+    .skill-block:nth-child(3), .skill-block:nth-child(4) { border-bottom: none; }
+    .skill-block-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-size: 12px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      font-weight: 400;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-heading {
+      font-size: clamp(36px, 4vw, 60px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .contact-heading strong { font-weight: 600; }
+    .contact-avail {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .avail-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #3a3a3a;
+      animation: pulse 2.4s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+    .contact-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .contact-row { display: flex; flex-direction: column; gap: 3px; }
+    .contact-row-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .contact-row a, .contact-row span {
+      font-size: 14px;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.15s;
+      font-weight: 400;
+    }
+    .contact-row a:hover { color: var(--muted); }
+
+    /* FOOTER */
+    footer {
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      nav { padding: 0 24px; }
+      .hero { grid-template-columns: 1fr; padding: 90px 24px 60px; gap: 48px; }
+      .positioning { grid-template-columns: 1fr; }
+      .pos-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .pos-card:last-child { border-bottom: none; }
+      section { padding: 64px 24px; }
+      .exp-item { grid-template-columns: 1fr; gap: 12px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-block { border-right: none !important; }
+      .skill-block:nth-child(3) { border-bottom: 1px solid var(--border) !important; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      footer { flex-direction: column; gap: 6px; padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-name">Momcilo Milosavljevic</a>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <p class="hero-label">Senior PM · PMO & Programme Delivery · AI-Augmented Operations</p>
+      <h1 class="hero-name">Momcilo<br><span>Milosavljevic</span></h1>
+      <p class="hero-tagline">
+        I build <strong>delivery discipline across complex, cross-functional programmes</strong> — from PMO governance and intake design to AI-augmented reporting and executive communication. Based in Novi Sad, Serbia. Remote-ready globally.
+      </p>
+      <div>
+        <a href="#contact" class="btn-primary">Get in touch</a>
+        <a href="#experience" class="btn-secondary">View work</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number"><span>10</span>+</div>
+        <div class="stat-label">Years delivering complex programmes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number"><span>10</span>+</div>
+        <div class="stat-label">Programs delivered on scope and budget</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number"><span>3</span></div>
+        <div class="stat-label">Industry verticals: IT, Finance, Logistics</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number"><span>6</span></div>
+        <div class="stat-label">Concurrent programmes under active governance</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="positioning">
+    <div class="pos-card">
+      <p class="pos-label">What I do</p>
+      <p class="pos-text">Programme and portfolio delivery — governance design, risk management, stakeholder alignment, and OKR-driven execution across complex organisations.</p>
+    </div>
+    <div class="pos-card">
+      <p class="pos-label">How I do it</p>
+      <p class="pos-text">PMO infrastructure, risk-driven planning, and AI-augmented tooling that reduces reporting overhead and surfaces delivery risk earlier.</p>
+    </div>
+    <div class="pos-card">
+      <p class="pos-label">Available for</p>
+      <p class="pos-text">Advisory engagements, interim delivery leads, and fractional PMO build-outs for startups, scale-ups, and SMEs.</p>
+    </div>
+  </div>
+
+  <section id="experience">
+    <div class="section-header">
+      <span class="section-index">01</span>
+      <span class="section-title">Experience</span>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <p class="exp-period">Feb 2025 — Present</p>
+        <p class="exp-company">Gambling.com Group<br>Novi Sad, Serbia · Remote</p>
+      </div>
+      <div>
+        <h3 class="exp-title">Finance Transformation Program Delivery Lead & Senior PM</h3>
+        <ul class="exp-bullets">
+          <li>Managing <strong>six concurrent finance transformation programmes</strong> across P2P, AP automation, Corporate Cards & T&E, ERP reporting migration, payment processor integrations, and subscription analytics — all mapped to H1 2026 OKRs</li>
+          <li>Leading <strong>SpendSmart (Ramp) implementation</strong> across Procure-to-Pay, Accounts Payable, and Cards & T&E; overseeing NetSuite integration, UAT, and cross-functional configuration with CSM and engineering teams</li>
+          <li>Building and operating full <strong>PMO governance infrastructure</strong>: project charters, BRDs, RACI matrices, risk logs, and executive reporting via Confluence; co-designed the company-wide Project Intake Form</li>
+          <li>Developing <strong>AI-augmented delivery tooling</strong> using n8n, Jira, and Claude APIs — including automated weekly programme reporting and meeting intelligence workflows</li>
+          <li>Serving as primary liaison between VP Finance, Finance leads, Legal, and delivery teams across Ireland and the US</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <p class="exp-period">May 2023 — Feb 2025</p>
+        <p class="exp-company">PWO by Lottomatica<br>(formerly SKS365) · Belgrade, Serbia</p>
+      </div>
+      <div>
+        <h3 class="exp-title">IT Project Manager</h3>
+        <ul class="exp-bullets">
+          <li>Delivered <strong>10+ cross-functional IT projects</strong> across engineering, product, security, and infrastructure — all on scope, budget, and timeline</li>
+          <li>Co-implemented a company-wide <strong>SDLC process framework</strong> with the PMO, improving delivery predictability across all teams</li>
+          <li>Managed post-acquisition system migrations, sports betting platform enhancements, and multi-team release governance</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <p class="exp-period">Sep 2019 — Jun 2023</p>
+        <p class="exp-company">Simula DOO<br>Novi Sad / Belgrade, Serbia</p>
+      </div>
+      <div>
+        <h3 class="exp-title">Project Manager / Technical Lead</h3>
+        <ul class="exp-bullets">
+          <li>Led end-to-end delivery of .NET, iOS, Android, and Web projects; managed teams of 8 to 15 engineers across parallel workstreams</li>
+          <li>Introduced structured Agile frameworks, backlog management, and sprint planning where ad-hoc processes previously existed</li>
+          <li>Contributed to a <strong>15% reduction in delivery costs</strong> through resource optimisation and budget planning improvements</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div>
+        <p class="exp-period">Jan 2016 — Sep 2019</p>
+        <p class="exp-company">Biliczki · Ada, Serbia</p>
+      </div>
+      <div>
+        <h3 class="exp-title">Logistics Project Manager</h3>
+        <ul class="exp-bullets">
+          <li>Managed logistics operations across production, retail, and import/export; introduced process improvements that reduced operational costs and coordination overhead</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-index">02</span>
+      <span class="section-title">Skills & Competencies</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <p class="skill-block-title">Delivery & Programme Management</p>
+        <div class="skill-tags">
+          <span class="tag">Program & Portfolio Management</span>
+          <span class="tag">Agile / Scrum / Kanban</span>
+          <span class="tag">Hybrid Delivery</span>
+          <span class="tag">SDLC</span>
+          <span class="tag">Risk & Dependency Management</span>
+          <span class="tag">Stage Gate Governance</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <p class="skill-block-title">PMO & Governance</p>
+        <div class="skill-tags">
+          <span class="tag">PMO Committee & Intake Design</span>
+          <span class="tag">OKR Programme Delivery</span>
+          <span class="tag">Executive Reporting</span>
+          <span class="tag">Delivery Standards</span>
+          <span class="tag">C-Suite Communication</span>
+          <span class="tag">RACI & BRD Authoring</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <p class="skill-block-title">Stakeholder & Cross-functional Leadership</p>
+        <div class="skill-tags">
+          <span class="tag">VP & C-Suite Engagement</span>
+          <span class="tag">Vendor Coordination</span>
+          <span class="tag">Cross-functional Team Leadership</span>
+          <span class="tag">Legal & Compliance Liaison</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <p class="skill-block-title">AI & Tooling</p>
+        <div class="skill-tags">
+          <span class="tag">n8n Workflow Automation</span>
+          <span class="tag">Claude API (Agentic)</span>
+          <span class="tag">Jira (Advanced JQL)</span>
+          <span class="tag">Confluence Architecture</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Atlassian MCP</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-grid">
+      <div>
+        <div class="section-header" style="margin-bottom:32px;">
+          <span class="section-index">03</span>
+          <span class="section-title">Contact</span>
+        </div>
+        <h2 class="contact-heading">Let's work<br><strong>together.</strong></h2>
+        <br />
+        <p class="contact-avail"><span class="avail-dot"></span> Available for advisory and delivery engagements</p>
+      </div>
+      <div class="contact-rows">
+        <div class="contact-row">
+          <span class="contact-row-label">Email</span>
+          <a href="mailto:milosavljevicmomcilo23@gmail.com">milosavljevicmomcilo23@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-label">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/momcilomilosavljevic/" target="_blank" rel="noopener">linkedin.com/in/momcilomilosavljevic</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-label">Phone / WhatsApp</span>
+          <a href="tel:+381601501564">+381 60 150 1564</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-label">Location</span>
+          <span>Novi Sad, Serbia · Remote-ready globally</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Momcilo Milosavljevic</span>
+    <span>Novi Sad, Serbia</span>
+  </footer>
+
+</body>
+</html>    nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
